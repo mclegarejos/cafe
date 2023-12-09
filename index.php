@@ -20,6 +20,12 @@
             <img src="img/logo.jpg" alt="">
         </a>
 
+    <!-- LOGIN AND SIGNUP -->
+        <div class="login-signup-links">
+            <a href="cafelogin.php" class="login-link">Login</a>
+            <a href="cafesignup.php" class="signup-link">Signup</a>
+        </div>
+
         <!-- MENU ICON -->
         <i class='bx bx-menu' id="menu-icon"></i>
 
@@ -240,35 +246,8 @@
     <div class="copyright">
         <p>Coffee and Beyond & Emsaay All Right Reserved</p>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- JS LINK -->
+    
+  <!-- JS LINK -->
     <script src="main.js"></script>
 </body>
 </html>
