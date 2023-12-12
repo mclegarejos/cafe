@@ -4,12 +4,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee and Beyond</title>
 
+    <!--CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--JQUERY LINK -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- BOOTSTRAP LINK -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
 
     <!-- CSS LINK -->
     <link rel="stylesheet" href="style.css">
 
     <!-- BOX ICONS -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#exampleModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus');
+        });
+    });
+    </script>
 
 </head>
 <body>
@@ -89,7 +107,7 @@
                 <h3>Salted Caramel</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a href="#">Add to Cart</a>
+                    <a data-toggle="modal" data-target="#saltedcaramel">Add to Cart</a>
                 </div>
             </div>
 
@@ -98,7 +116,7 @@
                 <h3>Lemon Yakult</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a href="#">Add to Cart</a>
+                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
                 </div>
             </div>
 
@@ -107,7 +125,7 @@
                 <h3>Java Chip Frappe</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a href="#">Add to Cart</a>
+                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
                 </div>
             </div>
             
@@ -116,7 +134,7 @@
                 <h3>Watermelon Yakult</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a href="#">Add to Cart</a>
+                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
                 </div>
             </div>
 
@@ -125,7 +143,7 @@
                 <h3>Cookies and Cream Frappe</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a href="#">Add to Cart</a>
+                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
                 </div>
             </div>
 
@@ -134,7 +152,7 @@
                 <h3>Mango Graham</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a href="#">Add to Cart</a>
+                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
                 </div>
             </div>
 
@@ -143,7 +161,7 @@
                 <h3>Strawberry Cheesecake</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a href="#">Add to Cart</a>
+                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
                 </div>
             </div>
 
@@ -152,7 +170,7 @@
                 <h3>Hot Cappuccino</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a href="#">Add to Cart</a>
+                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
                 </div>
             </div>
 
@@ -242,6 +260,70 @@
         </div>
     </section>
 
+
+    <!-- MODAL -->
+
+<div class="modal fade" id="saltedcaramel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add to cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+      </div>
+
+        <div class="modal-body">
+            <h3>Salted Caramel</h3>
+        </div>
+
+    <!-- QUANTITY -->
+
+    <p><b>Quantity</b></p>
+        <input type="number" class="form-control" name="quantity" id="quantity" value="1">
+    <br>
+
+    
+        <!--SIZES -->
+    <p><b>Size</b></p>
+        <select class="form-control" id="size" required>
+            <option value="">Select size</option>
+            <option value="30">12 oz</option>
+            <option value="40">16 oz</option>
+            <option value="50">22 oz</option>
+        </select>
+    <br>
+
+    <!--ADD ONS -->
+    <p><b>Add Ons</b></p>
+        <form action="">
+            <input type="checkbox" class="addOns" name="addon1" value="10"> Syrup ₱10.00
+            <br>
+            <input type="checkbox" class="addOns" name="addon2" value="15"> Pearl ₱15.00
+            <br>
+            <input type="checkbox" class="addOns" name="addon3" value="20"> Milk ₱20.00
+        </form>
+    <br>
+
+    <!-- TOTAL -->
+    <p><b>Total</b></p>
+        <span id="grandtotal">₱0.00</span>
+            <input type="hidden" id="txtgrandtotal" name="total" required>
+            <br>
+                <div class="text-center">
+                    <div class="col-xs-12 text-right">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-info" onclick="addToCart()">Add to Cart</button>
+                    </div>
+                </div>
+        
+
+        
+    </div>
+  </div>
+</div>
+
+
     <!-- COPYRIGHT -->
     <div class="copyright">
         <p>Coffee and Beyond & Emsaay All Right Reserved</p>
@@ -249,5 +331,7 @@
     
   <!-- JS LINK -->
     <script src="main.js"></script>
+
+
 </body>
 </html>
