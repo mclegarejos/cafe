@@ -10,9 +10,16 @@
     <!--JQUERY LINK -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    <!-- BOOTSTRAP LINK -->
+    <!-- BOOTSTRAP LINKS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <!-- CSS LINK -->
@@ -23,7 +30,7 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        $('#exampleModal').on('shown.bs.modal', function () {
+        $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').trigger('focus');
         });
     });
@@ -107,7 +114,7 @@
                 <h3>Salted Caramel</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a data-toggle="modal" data-target="#saltedcaramel">Add to Cart</a>
+                    <a class="add-to-cart-btn" data-toggle="modal" data-target="#saltedcaramelModal">Add to Cart</a>
                 </div>
             </div>
 
@@ -116,7 +123,7 @@
                 <h3>Lemon Yakult</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
+                    <a class="add-to-cart-btn" data-toggle="modal" data-target="#lemonyakultModal">Add to Cart</a>
                 </div>
             </div>
 
@@ -125,7 +132,7 @@
                 <h3>Java Chip Frappe</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
+                    <a class="add-to-cart-btn" data-toggle="modal" data-target="#javachipModal">Add to Cart</a>
                 </div>
             </div>
             
@@ -134,46 +141,9 @@
                 <h3>Watermelon Yakult</h3>
                 <div class="content">
                     <span>₱100</span>
-                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
+                    <a class="add-to-cart-btn" data-toggle="modal" data-target="#watermelonyakultModal">Add to Cart</a>
                 </div>
             </div>
-
-            <div class="box">
-                <img src="img/p5.jpg" alt="">
-                <h3>Cookies and Cream Frappe</h3>
-                <div class="content">
-                    <span>₱100</span>
-                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <img src="img/p6.jpg" alt="">
-                <h3>Mango Graham</h3>
-                <div class="content">
-                    <span>₱100</span>
-                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <img src="img/p7.jpg" alt="">
-                <h3>Strawberry Cheesecake</h3>
-                <div class="content">
-                    <span>₱100</span>
-                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <img src="img/p8.jpg" alt="">
-                <h3>Hot Cappuccino</h3>
-                <div class="content">
-                    <span>₱100</span>
-                    <a data-toggle="modal" data-target="#exampleModal">Add to Cart</a>
-                </div>
-            </div>
-
         </div>
     </section>
 
@@ -261,9 +231,9 @@
     </section>
 
 
-    <!-- MODAL -->
+    <!-- MODAL SALTED CARAMEL -->
 
-<div class="modal fade" id="saltedcaramel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade product-modal" id="saltedcaramelModal" tabindex="-1" role="dialog" aria-labelledby="saltedcaramelModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -280,13 +250,13 @@
     <!-- QUANTITY -->
 
     <p><b>Quantity</b></p>
-        <input type="number" class="form-control" name="quantity" id="quantity" value="1">
+        <input type="number" class="form-control saltedcaramelQuantity" value="1">
     <br>
 
     
         <!--SIZES -->
     <p><b>Size</b></p>
-        <select class="form-control" id="size" required>
+        <select class="form-control saltedcaramelSize" required>
             <option value="">Select size</option>
             <option value="30">12 oz</option>
             <option value="40">16 oz</option>
@@ -307,18 +277,197 @@
 
     <!-- TOTAL -->
     <p><b>Total</b></p>
-        <span id="grandtotal">₱0.00</span>
-            <input type="hidden" id="txtgrandtotal" name="total" required>
+        <span class="grandtotal">₱0.00</span>
+            <input type="hidden" class="txtgrandtotal" name="total" required>
             <br>
                 <div class="text-center">
                     <div class="col-xs-12 text-right">
                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-sm btn-info" onclick="addToCart()">Add to Cart</button>
+                    <button type="submit" class="btn btn-sm btn-info" onclick="addToCart('saltedcaramel')">Add to Cart</button>
                     </div>
                 </div>
-        
+            
 
         
+    </div>
+  </div>
+</div>
+
+<!-- MODAL LEMON YAKULT -->
+
+<div class="modal fade product-modal" id="lemonyakultModal" tabindex="-1" role="dialog" aria-labelledby="lemonyakultModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add to cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+      </div>
+
+        <div class="modal-body">
+            <h3>Lemon Yakult</h3>
+        </div>
+
+    <!-- QUANTITY -->
+
+    <p><b>Quantity</b></p>
+        <input type="number" class="form-control lemonyakultQuantity" value="1">
+    <br>
+
+    
+        <!--SIZES -->
+    <p><b>Size</b></p>
+        <select class="form-control lemonyakultSize" required>
+            <option value="">Select size</option>
+            <option value="30">12 oz</option>
+            <option value="40">16 oz</option>
+            <option value="50">22 oz</option>
+        </select>
+    <br>
+
+    <!--ADD ONS -->
+    <p><b>Add Ons</b></p>
+        <form action="">
+            <input type="checkbox" class="addOns" name="addon1" value="10"> Syrup ₱10.00
+            <br>
+            <input type="checkbox" class="addOns" name="addon2" value="15"> Pearl ₱15.00
+            <br>
+            <input type="checkbox" class="addOns" name="addon3" value="20"> Milk ₱20.00
+        </form>
+    <br>
+
+    <!-- TOTAL -->
+    <p><b>Total</b></p>
+        <span class="grandtotal">₱0.00</span>
+            <input type="hidden" class="txtgrandtotal" name="total" required>
+            <br>
+                <div class="text-center">
+                    <div class="col-xs-12 text-right">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-info" onclick="addToCart('lemonyakult')">Add to Cart</button>
+                    </div>
+                </div>       
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL JAVA CHIP -->
+
+<div class="modal fade product-modal" id="javachipModal" tabindex="-1" role="dialog" aria-labelledby="javachipModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add to cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+      </div>
+
+        <div class="modal-body">
+            <h3>Java Chip Frappe</h3>
+        </div>
+
+    <!-- QUANTITY -->
+
+    <p><b>Quantity</b></p>
+        <input type="number" class="form-control javachipQuantity" value="1">
+    <br>
+
+    
+        <!--SIZES -->
+    <p><b>Size</b></p>
+        <select class="form-control javachipSize" required>
+            <option value="">Select size</option>
+            <option value="30">12 oz</option>
+            <option value="40">16 oz</option>
+            <option value="50">22 oz</option>
+        </select>
+    <br>
+
+    <!--ADD ONS -->
+    <p><b>Add Ons</b></p>
+        <form action="">
+            <input type="checkbox" class="addOns" name="addon1" value="10"> Syrup ₱10.00
+            <br>
+            <input type="checkbox" class="addOns" name="addon2" value="15"> Pearl ₱15.00
+            <br>
+            <input type="checkbox" class="addOns" name="addon3" value="20"> Milk ₱20.00
+        </form>
+    <br>
+
+    <!-- TOTAL -->
+    <p><b>Total</b></p>
+        <span class="grandtotal">₱0.00</span>
+            <input type="hidden" class="txtgrandtotal" name="total" required>
+            <br>
+                <div class="text-center">
+                    <div class="col-xs-12 text-right">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-info" onclick="addToCart('javachip')">Add to Cart</button>
+                    </div>
+                </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL WATERMELON YAKULT -->
+
+<div class="modal fade product-modal" id="watermelonyakultModal" tabindex="-1" role="dialog" aria-labelledby="watermelonyakultModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add to cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+      </div>
+
+        <div class="modal-body">
+            <h3>Watermelon yakult</h3>
+        </div>
+
+    <!-- QUANTITY -->
+
+    <p><b>Quantity</b></p>
+        <input type="number" class="form-control watermelonyakultQuantity" value="1">
+    <br>
+
+    
+        <!--SIZES -->
+    <p><b>Size</b></p>
+        <select class="form-control watermelonyakultSize" required>
+            <option value="">Select size</option>
+            <option value="30">12 oz</option>
+            <option value="40">16 oz</option>
+            <option value="50">22 oz</option>
+        </select>
+    <br>
+
+    <!--ADD ONS -->
+    <p><b>Add Ons</b></p>
+        <form action="">
+            <input type="checkbox" class="addOns" name="addon1" value="10"> Syrup ₱10.00
+            <br>
+            <input type="checkbox" class="addOns" name="addon2" value="15"> Pearl ₱15.00
+            <br>
+            <input type="checkbox" class="addOns" name="addon3" value="20"> Milk ₱20.00
+        </form>
+    <br>
+
+    <!-- TOTAL -->
+    <p><b>Total</b></p>
+        <span class="grandtotal">₱0.00</span>
+            <input type="hidden" class="txtgrandtotal" name="total" required>
+            <br>
+                <div class="text-center">
+                    <div class="col-xs-12 text-right">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-info" onclick="addToCart('watermelonyakult')">Add to Cart</button>
+                    </div>
+                </div>        
     </div>
   </div>
 </div>
@@ -332,6 +481,7 @@
   <!-- JS LINK -->
     <script src="main.js"></script>
 
+    
 
 </body>
 </html>

@@ -1,76 +1,101 @@
+function addToCart(product) {
+    var modal = $("#" + product + "Modal");
+    var selectedSize = modal.find("." + product + "Size").val();
+
+    if (!selectedSize) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Please select a size before adding to cart!",
+        });
+    } else {
+        Swal.fire({
+            title: "Added to cart!",
+            text: product + " has been added to your cart",
+            icon: "success"
+        });
+    }
+}
+
 $(document).ready(function () {
     $(".addOns").prop('disabled', true);
 
+    // Toggle search box
     $('#search-icon').click(function () {
         $('.search-box').toggleClass('active');
         $('.navbar').removeClass('active');
     });
 
+    // Toggle menu
     $('#menu-icon').click(function () {
         $('.navbar').toggleClass('active');
         $('.search-box').removeClass('active');
     });
 
+    // Remove classes on scroll
     $(window).scroll(function () {
         $('.navbar').removeClass('active');
         $('.search-box').removeClass('active');
     });
 
+    // Add shadow to header on scroll
     var header = $('header');
-
     $(window).scroll(function () {
         header.toggleClass('shadow', $(this).scrollTop() > 0);
     });
 
-    $(document).on('DOMContentLoaded', function () {
-        $('#saltedcaramel').on('shown.bs.modal', function () {
-            calculateTotal();
-        });
+    
+    // Initialize total calculation on modal shown
+    $('#saltedcaramelModal, #lemonyakultModal, #javachipModal, #watermelonyakultModal').on('shown.bs.modal', function () {
+        calculateTotal($(this));
     });
 
-    $('.addOns').on('click', function() {
-        calculateTotal();
+    // Update total on add-ons click
+    $('.addOns').on('click', function () {
+        calculateTotal($(this).closest('.modal'));
     });
 
-    function calculateTotal() {
-        var quantity = parseInt($("#quantity").val()) || 0;
+    // Calculate total cost
+    function calculateTotal(modal) {
+        var quantity = parseInt(modal.find(".saltedcaramelQuantity, .lemonyakultQuantity, .javachipQuantity, .watermelonyakultQuantity").val()) || 0;
+        var selectedSize = modal.find(".saltedcaramelSize, .lemonyakultSize, .javachipSize, .watermelonyakultSize");
+        var sizeCost = parseFloat(selectedSize.find('option:selected').val()) || 0;
 
-        var selectedSize = $("#size");
-        var sizeCost = selectedSize.find('option:selected').val() || 0;
-
-        var addons = $(".addOns");
-
+        var addons = modal.find(".addOns");
         var addonsCost = 0;
 
         addons.each(function () {
             if ($(this).prop('checked')) {
                 addonsCost += parseFloat($(this).val());
-                console.log($(this).val());
             }
         });
 
-        var totalCost = quantity * parseFloat(sizeCost) + addonsCost;
-        console.log(addonsCost);
-        $("#grandtotal").text("Total: ₱" + totalCost.toFixed(2));
-        $("#txtgrandtotal").val(totalCost.toFixed(2));
+        var totalCost = quantity * sizeCost + addonsCost;
+        modal.find(".grandtotal").text("Total: ₱" + totalCost.toFixed(2));
+        modal.find(".txtgrandtotal").val(totalCost.toFixed(2));
     }
 
-    $("#quantity").on("input", calculateTotal);
-    
-    $("#size").on("change", function() {
-        if ($(this).val() == '') {
-            $(".addOns").prop('checked', false);
-            $(".addOns").prop('disabled', true);
-        } else {
-            $(".addOns").prop('disabled', false);
-        }
-        calculateTotal();
+    // Handle quantity input
+    $(".saltedcaramelQuantity, .lemonyakultQuantity, .javachipQuantity, .watermelonyakultQuantity").on("input", function () {
+        calculateTotal($(this).closest('.modal'));
     });
 
-    $("[name='addons']").on("change", calculateTotal);
+    // Handle size change
+    $(".saltedcaramelSize, .lemonyakultSize, .javachipSize, .watermelonyakultSize").on("change", function () {
+        var modal = $(this).closest('.modal');
+        if ($(this).val() == '') {
+            modal.find(".addOns").prop('checked', false);
+            modal.find(".addOns").prop('disabled', true);
+        } else {
+            modal.find(".addOns").prop('disabled', false);
+        }
+        calculateTotal(modal);
+    });
 
-    function addToCart() {
-        alert("Added to cart!");
-    }
+    // Handle add-ons change
+    $(".addOns").on("change", function () {
+        calculateTotal($(this).closest('.modal'));
+    });
+
 
 });
